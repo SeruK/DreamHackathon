@@ -42,9 +42,10 @@ public class OpenDiveSensor : MonoBehaviour {
 	private float time_since_last_fullscreen=0;
 	private int is_tablet;
 
+#if UNITY_ANDROID
 	AndroidJavaObject mConfig;
 	AndroidJavaObject mWindowManager;
-
+#endif
 
 	private float q0,q1,q2,q3;
 	private float m0,m1,m2;
