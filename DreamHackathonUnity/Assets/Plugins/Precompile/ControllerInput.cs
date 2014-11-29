@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class ControllerInput
+public class ControllerInput
 {
 	// Might not be correct with this ver of Tattie Bogle
 	public enum Button
@@ -118,5 +118,9 @@ public static class ControllerInput
 		}
 
 		throw new System.Exception("Shouldn't come here!");
+	}
+
+	private ControllerInput()
+	{
 	}
 }

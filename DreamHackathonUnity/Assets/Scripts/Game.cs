@@ -71,10 +71,16 @@ public class Game : MonoBehaviour
 
 	public void OnHunterSpawned(Hunter in_hunter)
 	{
+		int playerIndex = hunterGOs.Count;
+		in_hunter.gameObject.name = "Hunter " + playerIndex;
 		foreach (var clook in in_hunter.GetComponentsInChildren<ControllerLook>())
 		{
-			clook.controller = hunterGOs.Count;
+			clook.controller = playerIndex;
 		}
+
+		var input = in_hunter.GetComponentInChildren<ControllerFPSInput>();
+		input.Controller = playerIndex;
+
 		hunterGOs.Add(in_hunter.gameObject);
 		var player = hunterGOs.Count;
 		if (player == 1)      in_hunter.Cam.rect = new Rect(0.0f, 0.0f, 0.5f, 0.5f);

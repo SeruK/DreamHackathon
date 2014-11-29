@@ -29,6 +29,7 @@ public class ControllerLook : MonoBehaviour {
 	public float maximumY = 60F;
 	public ControllerInput.Range range;
 	public int controller;
+	public bool invert;
 
 	float rotationY = 0F;
 
@@ -37,9 +38,11 @@ public class ControllerLook : MonoBehaviour {
 		if (axes == RotationAxes.XAndY)
 		{
 			float inputX = ControllerInput.GetAxis((uint)controller, range, ControllerInput.Axis.X);
+			if (invert) inputX = -inputX;
 			float rotationX = transform.localEulerAngles.y + inputX * sensitivityX;
 
 			float inputY = ControllerInput.GetAxis((uint)controller, range, ControllerInput.Axis.Y);
+			if (invert) inputY = -inputY;
 			rotationY += inputY * sensitivityY;
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
@@ -48,11 +51,13 @@ public class ControllerLook : MonoBehaviour {
 		else if (axes == RotationAxes.X)
 		{
 			float inputX = ControllerInput.GetAxis((uint)controller, range, ControllerInput.Axis.X);
+			if (invert) inputX = -inputX;
 			transform.Rotate(0, inputX * sensitivityX, 0);
 		}
 		else
 		{
 			float inputY = ControllerInput.GetAxis((uint)controller, range, ControllerInput.Axis.Y);
+			if (invert) inputY = -inputY;
 			rotationY += inputY * sensitivityY;
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
