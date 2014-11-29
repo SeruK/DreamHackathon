@@ -44,7 +44,7 @@ public class Victim : MonoBehaviour
 		if (!Network.isServer) return;
 
 		// TODO: Add props layer here
-		int layers = (1 << 9) | (1 << 10) | (1 << 11) | (1 << 12);
+		int layers = (1 << 9) | (1 << 10) | (1 << 11) | (1 << 12) | (1 << 13);
 
 		RaycastHit hitInfo;
 
