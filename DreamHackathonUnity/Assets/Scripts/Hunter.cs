@@ -7,6 +7,10 @@ public class Hunter : MonoBehaviour
 	public Transform Model;
 	public uint PlayerIndex;
 	public float StopTime = 0.5f;
+	
+	public AudioSource WalkSource;
+	public AudioSource DeathSource;
+	public AudioClip DeathClip;
 
 	private Game game;
 	private Vector3 modelOffset;
@@ -57,7 +61,15 @@ public class Hunter : MonoBehaviour
 	public void LateUpdate()
 	{
 		if (!Network.isClient) return;
-		if (charController.velocity.magnitude > 0.0f) stopTimer = StopTime;
+		if (charController.velocity.magnitude > 0.0f)
+		{
+			SetWalkMute(false);
+			stopTimer = StopTime;
+		}
+		else
+		{
+			SetWalkMute(true);
+		}
 	}
 
 	public void SetPlayerIndex(uint in_index)
@@ -122,7 +134,29 @@ public class Hunter : MonoBehaviour
 	{
 		if (!invincible)
 		{
+			var p = transform.position;
+			PlayDeathClip(p.x, p.y, p.z);
 			game.RespawnHunter(this);
 		}
+	}
+
+	[RPC]
+	void SetWalkMute(bool in_mute)
+	{
+		if (networkView.isMine)
+		{
+			networkView.RPC("SetWalkMute", RPCMode.OthersBuffered, in_mute);
+		}
+		WalkSource.mute = in_mute;
+	}
+
+	[RPC]
+	void PlayDeathClip(float in_x, float in_y, float in_z)
+	{
+		if (networkView.isMine)
+		{
+			networkView.RPC("PlayDeathClip", RPCMode.OthersBuffered, in_x, in_y, in_z);
+		}
+		DeathSource.PlayOneShot(DeathClip);
 	}
 }

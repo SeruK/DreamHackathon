@@ -6233,7 +6233,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8e0c910dc43f246289ddc0ff5c99580f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -8359,6 +8359,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 797603931}
+  - 65: {fileID: 797603932}
   m_Layer: 13
   m_Name: Tree
   m_TagString: Untagged
@@ -8379,6 +8380,19 @@ Transform:
   - {fileID: 433956207}
   m_Father: {fileID: 608320797}
   m_RootOrder: 4
+--- !u!65 &797603932
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 0e48fa2aabeef49178d7ae6fc12adaa9,
+    type: 2}
+  m_PrefabInternal: {fileID: 378134194}
+  m_GameObject: {fileID: 797603930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.70000005, y: 14.79, z: 2.73000002}
+  m_Center: {x: .49000001, y: 7.03000021, z: 0}
 --- !u!1 &797797243
 GameObject:
   m_ObjectHideFlags: 0
@@ -10563,6 +10577,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1029138151}
+  - 65: {fileID: 1029138152}
   m_Layer: 13
   m_Name: Tree
   m_TagString: Untagged
@@ -10583,6 +10598,19 @@ Transform:
   - {fileID: 1196428308}
   m_Father: {fileID: 608320797}
   m_RootOrder: 2
+--- !u!65 &1029138152
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 0e48fa2aabeef49178d7ae6fc12adaa9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1021786310}
+  m_GameObject: {fileID: 1029138150}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.70000005, y: 14.79, z: 2.73000002}
+  m_Center: {x: .49000001, y: 7.03000021, z: 0}
 --- !u!1 &1047885330
 GameObject:
   m_ObjectHideFlags: 0
@@ -14844,6 +14872,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1535656081}
+  - 65: {fileID: 1535656082}
   m_Layer: 13
   m_Name: Tree
   m_TagString: Untagged
@@ -14864,6 +14893,19 @@ Transform:
   - {fileID: 52916564}
   m_Father: {fileID: 608320797}
   m_RootOrder: 3
+--- !u!65 &1535656082
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 0e48fa2aabeef49178d7ae6fc12adaa9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1969511002}
+  m_GameObject: {fileID: 1535656080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.70000005, y: 14.79, z: 2.73000002}
+  m_Center: {x: .49000001, y: 7.03000021, z: 0}
 --- !u!1 &1537574591
 GameObject:
   m_ObjectHideFlags: 0
@@ -19463,6 +19505,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2048974118}
+  - 65: {fileID: 2048974119}
   m_Layer: 13
   m_Name: Tree
   m_TagString: Untagged
@@ -19483,6 +19526,19 @@ Transform:
   - {fileID: 100882682}
   m_Father: {fileID: 608320797}
   m_RootOrder: 1
+--- !u!65 &2048974119
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 0e48fa2aabeef49178d7ae6fc12adaa9,
+    type: 2}
+  m_PrefabInternal: {fileID: 216163435}
+  m_GameObject: {fileID: 2048974117}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.70000005, y: 14.79, z: 2.73000002}
+  m_Center: {x: .49000001, y: 7.03000021, z: 0}
 --- !u!1 &2065311391
 GameObject:
   m_ObjectHideFlags: 0
@@ -20184,6 +20240,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2143639378}
+  - 65: {fileID: 2143639379}
   m_Layer: 13
   m_Name: Tree
   m_TagString: Untagged
@@ -20204,6 +20261,19 @@ Transform:
   - {fileID: 1484183911}
   m_Father: {fileID: 608320797}
   m_RootOrder: 0
+--- !u!65 &2143639379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 0e48fa2aabeef49178d7ae6fc12adaa9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1413895947}
+  m_GameObject: {fileID: 2143639377}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.70000005, y: 14.79, z: 2.73000002}
+  m_Center: {x: .49000001, y: 7.03000021, z: 0}
 --- !u!1 &2144063157
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 148: {fileID: 14800000}
   - 114: {fileID: 11400002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Victim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - 124: {fileID: 12400000}
   - 92: {fileID: 9200000}
   - 65: {fileID: 6500000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - 4: {fileID: 400008}
   - 114: {fileID: 11400000}
   - 148: {fileID: 14800002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dive_Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - 92: {fileID: 9200002}
   - 81: {fileID: 8100000}
   - 65: {fileID: 6500002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400016}
   - 108: {fileID: 10800000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400018}
   - 108: {fileID: 10800002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RaycastOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.52631807, y: 5.79059839, z: -3.92091942}
+  m_LocalPosition: {x: 17.9403629, y: 24.7737045, z: -19.5996418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -536,7 +536,7 @@ Light:
   m_Type: 0
   m_Color: {r: .477941155, g: .380995691, b: .126513839, a: 1}
   m_Intensity: 1
-  m_Range: 64.1600037
+  m_Range: 75
   m_SpotAngle: 58
   m_CookieSize: 10
   m_Shadows:
@@ -592,10 +592,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fe9506f31ba4c7491ed029a22388c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DieSphereOffset: {x: 0, y: 1, z: 0}
   LookSphereRadius: .5
+  DieDistance: 2
   RaycastOrigin: {fileID: 400014}
   Model: {fileID: 400000}
   CameraRoot: {fileID: 400008}
+  DeathClip: {fileID: 8300000, guid: 00a4dd393737cec4686e4ea8fd3d097f, type: 3}
   DebugGizmoDistance: 11.6300001
 --- !u!124 &12400000
 Behaviour:

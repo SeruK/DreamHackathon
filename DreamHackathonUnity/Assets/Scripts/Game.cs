@@ -12,8 +12,14 @@ public class Game : MonoBehaviour
 	public Transform[] HunterSpawnPoints;
 	public GameObject  HunterPrefab;
 
+	public float LockTime = 2.0f;
+
 	private List<GameObject> hunterGOs;
 	private GameObject victimGO;
+
+	private float lockTimer;
+
+	public bool RestartingGame;
 
 //#if UNITY_IPHONE && !UNITY_EDITOR
 #if UNITY_IPHONE
@@ -86,10 +92,43 @@ public class Game : MonoBehaviour
 		in_hunter.transform.rotation = spawnPoint.rotation;
 	}
 
+	public void RestartGame()
+	{
+		RestartingGame = true;
+		lockTimer = LockTime;
+
+		if (!Network.isClient) return;
+
+		foreach (var hunter in hunterGOs)
+		{
+			hunter.GetComponent<ControllerFPSInput>().enabled = false;
+		}
+	}
+
+	private void RespawnAllHunters()
+	{
+		if (!Network.isClient) return;
+
+		foreach (var hunter in hunterGOs)
+		{
+			hunter.GetComponent<ControllerFPSInput>().enabled = true;
+			RespawnHunter(hunter.GetComponent<Hunter>());
+		}
+	}
+
 	/***********************************************/
 
 	void Update()
 	{
+		if (RestartingGame)
+		{
+			lockTimer -= Time.deltaTime;
+			if (lockTimer <= 0.0f)
+			{
+				RestartingGame = false;
+				RespawnAllHunters();
+			}
+		}
 //		if (hunterGOs != null && Network.isClient) 
 //		{
 //			for (uint i = 0; i < hunterGOs.Count; ++i)

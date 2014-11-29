@@ -3,11 +3,15 @@ using System.Collections;
 
 public class Victim : MonoBehaviour
 {
+	public Vector3 DieSphereOffset;
 	public float LookSphereRadius = 0.5f;
+	public float DieDistance = 0.5f;
 
 	public Transform RaycastOrigin; 
 	public Transform Model;
 	public Transform CameraRoot;
+
+	public AudioClip DeathClip;
 
 #if UNITY_EDITOR
 	public float DebugGizmoDistance = 5.0f;
@@ -51,13 +55,50 @@ public class Victim : MonoBehaviour
 		if (Physics.SphereCast(ray, LookSphereRadius, out hitInfo, 100000.0f, layers))
 		{
 			Debug.Log("Hit! " + hitInfo.collider);
-			hitInfo.collider.BroadcastMessage("WasHit", SendMessageOptions.DontRequireReceiver);
+			if (hitInfo.collider.gameObject.layer != 13)
+			{
+				if (Vector3.Distance(transform.position + DieSphereOffset, hitInfo.collider.transform.position) <= DieDistance)
+				{
+					Die();
+				}
+				else
+				{
+					hitInfo.collider.BroadcastMessage("WasHit", SendMessageOptions.DontRequireReceiver);
+				}
+			}
+
 		}
+	}
+
+	[RPC]
+	void Die()
+	{
+		var game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();
+		if (game.RestartingGame) return;
+		if (networkView.isMine)
+		{
+			networkView.RPC("Die", RPCMode.OthersBuffered);
+		}
+		var audiopos = transform.position + DieSphereOffset;
+		PlayDeathClip(audiopos.x, audiopos.y, audiopos.z);
+		game.RestartGame();
+	}
+
+	[RPC]
+	void PlayDeathClip(float in_x, float in_y, float in_z)
+	{
+		if (networkView.isMine)
+		{
+			networkView.RPC("PlayDeathClip", RPCMode.OthersBuffered, in_x, in_y, in_z);
+		}
+		AudioSource.PlayClipAtPoint(DeathClip, new Vector3(in_x, in_y, in_z));
 	}
 
 #if UNITY_EDITOR
 	void OnDrawGizmosSelected()
 	{
+		Gizmos.DrawWireSphere(transform.position + DieSphereOffset, DieDistance);
+
 		Ray ray = GetRay();
 		var start = ray.origin;
 		var end = ray.origin + ray.direction * DebugGizmoDistance;
