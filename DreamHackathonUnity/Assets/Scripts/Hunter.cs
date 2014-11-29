@@ -5,8 +5,16 @@ public class Hunter : MonoBehaviour
 {
 	public Camera Cam;
 	public Transform Model;
+	public uint PlayerIndex;
+	public float StopTime = 0.5f;
 
+	private Game game;
 	private Vector3 modelOffset;
+	private float stopTimer;
+	private bool invincible {
+		get { return stopTimer <= 0.0f; }
+	}
+	private CharacterController charController;
 
 	void OnNetworkInstantiate(NetworkMessageInfo in_info)
 	{
@@ -19,12 +27,14 @@ public class Hunter : MonoBehaviour
 			}
 			else Cam.enabled = false;
 
-			var listener = GetComponentInChildren<AudioListener>();
-			listener.enabled = false;
+//			var listener = GetComponentInChildren<AudioListener>();
+//			listener.enabled = false;
 
 			var motor = GetComponent<CharacterMotor>();
 			motor.enabled = false;
 		}
+
+		charController = GetComponent<CharacterController>();
 
 		modelOffset = Model.transform.position - transform.position;
 		Model.transform.parent = null;
@@ -35,7 +45,7 @@ public class Hunter : MonoBehaviour
 			Debug.LogError("Couldn't find GameController!");
 			return;
 		}
-		var game = go.GetComponent<Game>();
+		game = go.GetComponent<Game>();
 		if (game == null)
 		{
 			Debug.LogError("GameController did not have Game script!");
@@ -44,8 +54,15 @@ public class Hunter : MonoBehaviour
 		game.OnHunterSpawned(this);
 	}
 
+	public void LateUpdate()
+	{
+		if (!Network.isClient) return;
+		if (charController.velocity.magnitude > 0.0f) stopTimer = StopTime;
+	}
+
 	public void SetPlayerIndex(uint in_index)
 	{
+		PlayerIndex = in_index;
 		gameObject.name = "Hunter " + in_index;
 		foreach (var clook in GetComponentsInChildren<ControllerLook>())
 		{
@@ -62,7 +79,7 @@ public class Hunter : MonoBehaviour
 
 		int layer = 9 + (int)in_index;
 		Cam.cullingMask &= ~(1 << layer);
-		SetPhysicsLayerRecursive(Model.gameObject, layer);
+		SetPhysicsLayerRecursive(gameObject, layer);
 	}
 
 	void SetPhysicsLayerRecursive(GameObject in_object, int in_layer)
@@ -85,11 +102,27 @@ public class Hunter : MonoBehaviour
 
 	void Update()
 	{
+		if (stopTimer > 0.0f) stopTimer -= Time.deltaTime;
+
 		if (Model)
 		{
 			var trans = Model.transform;
 			trans.position = Vector3.Lerp(trans.position, transform.position + modelOffset, 0.1f);
 			trans.rotation = Quaternion.Slerp(trans.rotation, transform.rotation, 0.1f);
+		}
+	}
+
+	public void WasHit()
+	{
+		networkView.RPC("Die", RPCMode.OthersBuffered);
+	}
+
+	[RPC]
+	void Die()
+	{
+		if (!invincible)
+		{
+			game.RespawnHunter(this);
 		}
 	}
 }

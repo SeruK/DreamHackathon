@@ -75,7 +75,17 @@ public class Game : MonoBehaviour
 		hunterGOs.Add(in_hunter.gameObject);
 		in_hunter.SetPlayerIndex((uint)playerIndex);
 	}
-	
+
+	/***********************************************/
+
+	public void RespawnHunter(Hunter in_hunter)
+	{
+		if (!Network.isClient) return;
+		var spawnPoint = HunterSpawnPoints[in_hunter.PlayerIndex % HunterSpawnPoints.Length];
+		in_hunter.transform.position = spawnPoint.position;
+		in_hunter.transform.rotation = spawnPoint.rotation;
+	}
+
 	/***********************************************/
 
 	void Update()
