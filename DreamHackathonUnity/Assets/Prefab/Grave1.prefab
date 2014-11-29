@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
+  - 65: {fileID: 6500000}
   m_Layer: 13
   m_Name: Grave1
   m_TagString: Untagged
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -.452525228, y: .543342412, z: .543342352, w: .452525258}
-  m_LocalPosition: {x: -22.2999992, y: -1, z: 22.3999996}
+  m_LocalPosition: {x: -22.2999992, y: -.370000005, z: 22.3999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,6 +57,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 4300000, guid: d1f576abb9664404f840734c1057a64e, type: 3}
+--- !u!65 &6500000
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.40000057, y: .480000615, z: 3.90000033}
+  m_Center: {x: -8.46317846e-07, y: .18271777, z: 1.35355783}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
