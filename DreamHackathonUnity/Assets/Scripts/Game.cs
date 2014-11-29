@@ -72,42 +72,29 @@ public class Game : MonoBehaviour
 	public void OnHunterSpawned(Hunter in_hunter)
 	{
 		int playerIndex = hunterGOs.Count;
-		in_hunter.gameObject.name = "Hunter " + playerIndex;
-		foreach (var clook in in_hunter.GetComponentsInChildren<ControllerLook>())
-		{
-			clook.controller = playerIndex;
-		}
-
-		var input = in_hunter.GetComponentInChildren<ControllerFPSInput>();
-		input.Controller = playerIndex;
-
 		hunterGOs.Add(in_hunter.gameObject);
-		var player = hunterGOs.Count;
-		if (player == 1)      in_hunter.Cam.rect = new Rect(0.0f, 0.0f, 0.5f, 0.5f);
-		else if (player == 2) in_hunter.Cam.rect = new Rect(0.5f, 0.0f, 0.5f, 0.5f);
-		else if (player == 3) in_hunter.Cam.rect = new Rect(0.0f, 0.5f, 0.5f, 0.5f);
-		else if (player == 4) in_hunter.Cam.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+		in_hunter.SetPlayerIndex((uint)playerIndex);
 	}
 	
 	/***********************************************/
 
 	void Update()
 	{
-		if (hunterGOs != null && Network.isClient) 
-		{
-			for (uint i = 0; i < hunterGOs.Count; ++i)
-			{
-				var hunterGO = hunterGOs[(int)i];
-				if (!hunterGO) continue;
-
-				var controller = hunterGO.GetComponent<CharacterController>();
-				if (!controller) continue;
-
-				var input = ControllerInput.GetRange(i, ControllerInput.Range.LeftStick);
-				float movement = 1 * Time.deltaTime;
-				controller.Move(new Vector3(input.x, 0, input.y) * movement);
-			}
-		}
+//		if (hunterGOs != null && Network.isClient) 
+//		{
+//			for (uint i = 0; i < hunterGOs.Count; ++i)
+//			{
+//				var hunterGO = hunterGOs[(int)i];
+//				if (!hunterGO) continue;
+//
+//				var controller = hunterGO.GetComponent<CharacterController>();
+//				if (!controller) continue;
+//
+//				var input = ControllerInput.GetRange(i, ControllerInput.Range.LeftStick);
+//				float movement = 1 * Time.deltaTime;
+//				controller.Move(new Vector3(input.x, 0, input.y) * movement);
+//			}
+//		}
 	}
 
 	/***********************************************/
