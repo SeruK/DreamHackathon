@@ -24,7 +24,10 @@ public class Victim : MonoBehaviour
 			Debug.Log("Disabling cameras");
 			foreach (var cam in GetComponentsInChildren<Camera>())
 			{
-				cam.enabled = false;
+				cam.rect = cam.gameObject.name == "Camera_left" ?
+					new Rect(0.3f, 0.3f, 0.2f, 0.3f) :
+					new Rect(0.5f, 0.3f, 0.2f, 0.3f);
+//				cam.enabled = false;
 			}
 		}
 

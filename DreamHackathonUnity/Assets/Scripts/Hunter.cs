@@ -92,6 +92,7 @@ public class Hunter : MonoBehaviour
 		int layer = 9 + (int)in_index;
 		Cam.cullingMask &= ~(1 << layer);
 		SetPhysicsLayerRecursive(gameObject, layer);
+		SetPhysicsLayerRecursive(Model.gameObject, layer);
 	}
 
 	void SetPhysicsLayerRecursive(GameObject in_object, int in_layer)

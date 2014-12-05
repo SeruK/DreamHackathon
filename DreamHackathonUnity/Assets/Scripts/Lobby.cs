@@ -68,7 +68,7 @@ public class Lobby : MonoBehaviour
 
 #else
 
-	public string ConnectionIP = "77.80.247.199";
+	public string ConnectionIP = "77.80.236.107";
 
 	private bool shouldConnect;
 	private bool connecting;
